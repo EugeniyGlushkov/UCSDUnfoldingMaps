@@ -5,6 +5,7 @@ import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.providers.AbstractMapProvider;
 import de.fhpotsdam.unfolding.providers.Google;
+import de.fhpotsdam.unfolding.providers.Microsoft;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 
@@ -48,6 +49,10 @@ public class HelloWorld extends PApplet
 		
 		// Select a map provider
 		AbstractMapProvider provider = new Google.GoogleTerrainProvider();
+		//AbstractMapProvider provider = new Microsoft.AerialProvider();
+		
+		//Proxy parameters: -Dhttp.proxyHost=195.19.217.154 -Dhttp.proxyPort=34577
+		
 		// Set a zoom level
 		int zoomLevel = 10;
 		
@@ -66,7 +71,7 @@ public class HelloWorld extends PApplet
 		// The 6th argument specifies the map provider.  
 		// There are several providers built-in.
 		// Note if you are working offline you must use the MBTilesMapProvider
-		map1 = new UnfoldingMap(this, 50, 50, 350, 500, provider);
+		map1 = new UnfoldingMap(this, 50, 0, 350, 500, provider);
 
 		// The next line zooms in and centers the map at 
 	    // 32.9 (latitude) and -117.2 (longitude)
@@ -79,7 +84,7 @@ public class HelloWorld extends PApplet
 		// Then you'll modify draw() below
 		map2 = new UnfoldingMap(this, 400, 50, 350, 500, provider);
 		
-		map2.zoomAndPanTo(zoomLevel, new Location(44.6f, 33.51f));
+		map2.zoomAndPanTo(zoomLevel, new Location(-22.9f, -43.2f));
 		
 		MapUtils.createDefaultEventDispatcher(this, map2);
 
