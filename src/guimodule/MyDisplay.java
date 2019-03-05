@@ -18,5 +18,18 @@ public class MyDisplay extends PApplet {
 
 	@Override
 	public void draw() {
+		int[] colorsRGB = sunColorSec(second());
+		fill(colorsRGB[0], colorsRGB[1], colorsRGB[2]);
+		ellipse(width / 4, height / 5, width / 4, height / 5);
+	}
+	
+	public int[] sunColorSec(float second) {
+		int[] rgb = new int[3];
+		float diffFrom30 = Math.abs(30 - second);
+		float ratio = diffFrom30 / 30;
+		rgb[0] = (int)(255 * ratio);
+		rgb[1] = (int)(255 * ratio);
+		rgb[2] = 0;
+		return rgb;
 	}
 }
