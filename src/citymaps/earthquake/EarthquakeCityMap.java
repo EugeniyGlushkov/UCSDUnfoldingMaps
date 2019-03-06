@@ -18,7 +18,7 @@ public class EarthquakeCityMap extends PApplet {
 
 	@Override
 	public void draw() {
-		background(10);
+		background(220);
 		map.draw();
 		//addKey();
 	}
