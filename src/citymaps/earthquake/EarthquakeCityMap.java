@@ -14,8 +14,8 @@ public class EarthquakeCityMap extends PApplet {
 	@Override
 	public void setup() {
 		size(950, 600, OPENGL);
-		//map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());
-    	map = new UnfoldingMap(this, 200, 50, 700, 500, new Microsoft.HybridProvider());
+		map = new UnfoldingMap(this, 200, 50, 700, 500, new Google.GoogleMapProvider());
+    	//map = new UnfoldingMap(this, 200, 50, 700, 500, new Microsoft.HybridProvider());
 		map.zoomToLevel(2);
 		MapUtils.createDefaultEventDispatcher(this, map); 
         Location valLoc = new Location(-38.14f, -73.03f);
