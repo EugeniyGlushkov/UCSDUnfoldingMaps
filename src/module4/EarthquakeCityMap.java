@@ -20,7 +20,7 @@ import processing.core.PApplet;
 /** EarthquakeCityMap
  * An application with an interactive map displaying earthquake data.
  * Author: UC San Diego Intermediate Software Development MOOC team
- * @author Your name here
+ * @author Evgen Glushkov
  * Date: July 17, 2015
  * */
 public class EarthquakeCityMap extends PApplet {
@@ -162,7 +162,6 @@ public class EarthquakeCityMap extends PApplet {
 	// set this "country" property already.  Otherwise it returns false.
 	private boolean isLand(PointFeature earthquake) {
 		
-		
 		// Loop over all the country markers.  
 		// For each, check if the earthquake PointFeature is in the 
 		// country in m.  Notice that isInCountry takes a PointFeature
@@ -171,6 +170,9 @@ public class EarthquakeCityMap extends PApplet {
 		for (Marker m : countryMarkers) {
 			// TODO: Finish this method using the helper method isInCountry
 			
+			if (m.isInside(map, earthquake.getLocation().getLat(), earthquake.getLocation().getLon())) {
+				return true;
+			}
 		}
 		
 		
