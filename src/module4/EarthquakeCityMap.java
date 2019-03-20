@@ -18,6 +18,8 @@ import de.fhpotsdam.unfolding.utils.MapUtils;
 import parsing.ParseFeed;
 import processing.core.PApplet;
 
+import static module4.EarthquakeMarker.*;
+
 /**
  * EarthquakeCityMap An application with an interactive map displaying
  * earthquake data. Author: UC San Diego Intermediate Software Development MOOC
@@ -143,21 +145,39 @@ public class EarthquakeCityMap extends PApplet {
 		rect(25, 50, 150, 250);
 
 		fill(0);
-		textAlign(LEFT, CENTER);
-		textSize(12);
-		text("Earthquake Key", 50, 75);
-
-		fill(color(255, 0, 0));
-		ellipse(50, 125, 15, 15);
-		fill(color(255, 255, 0));
-		ellipse(50, 175, 10, 10);
-		fill(color(0, 0, 255));
-		ellipse(50, 225, 5, 5);
-
-		fill(0, 0, 0);
-		text("5.0+ Magnitude", 75, 125);
-		text("4.0+ Magnitude", 75, 175);
-		text("Below 4.0", 75, 225);
+		textSize(15);
+		text("Earthquake Key", 45, 80);
+		text("City Marker", 70, 105);
+		text("Land Quake", 70, 125);
+		text("Ocean Quake", 70, 145);
+		text("Size ~ Magnitude", 40, 170);
+		text("Shallow", 70, 195);
+		text("Intermediate", 70, 215);
+		text("Deep", 70, 235);
+		drawTriangle(50, 101, 8);
+		fill(255);
+		ellipse(50, 120, 15, 15);
+		fill(255);
+		rect(43, 132, 15, 15);
+		fill(YELLOW);
+		ellipse(50, 190, 13, 13);
+		fill(BLUE);
+		ellipse(50, 210, 13, 13);
+		fill(RED);
+		ellipse(50, 230, 13, 13);
+	}
+	
+	private void drawTriangle(float x, float y, float size ) {
+		fill(200, 0, 0);
+		float trX1 = x;
+		float trY1 = y - size;
+		float dX = size * (float)Math.cos(Math.PI / 6);
+		float dY = size * (float)Math.sin(Math.PI / 6);
+		float trX2 = x + dX;
+		float trY2 = y + dY;
+		float trX3 = x - dX;
+		float trY3 = y + dY;
+		triangle(trX1, trY1, trX2, trY2, trX3, trY3);
 	}
 
 	// Checks whether this quake occurred on land. If it did, it sets the
@@ -243,7 +263,6 @@ public class EarthquakeCityMap extends PApplet {
 		contrEarthQuaks.append("+-------------------------+----------+\n");
 		contrEarthQuaks.append(String.format("|%-25s|%-10d|\n", "in the sea", quakInSea));
 		contrEarthQuaks.append("+-------------------------+----------+\n");
-		System.out.println(contrEarthQuaks);
 	}
 
 	private void printQuakesMy() {
