@@ -78,7 +78,7 @@ public class EarthquakeCityMap extends PApplet {
 			map = new UnfoldingMap(this, 200, 50, 650, 600, new Microsoft.AerialProvider());
 			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
 			// earthquakesURL = "2.5_week.atom";
-			//earthquakesURL = "test2.atom";
+			earthquakesURL = "quiz1.atom";
 		}
 		MapUtils.createDefaultEventDispatcher(this, map);
 
@@ -154,6 +154,7 @@ public class EarthquakeCityMap extends PApplet {
 		text("Shallow", 70, 195);
 		text("Intermediate", 70, 215);
 		text("Deep", 70, 235);
+		text("Past Day", 70, 255);
 		drawTriangle(50, 101, 8);
 		fill(255);
 		ellipse(50, 120, 15, 15);
@@ -165,6 +166,9 @@ public class EarthquakeCityMap extends PApplet {
 		ellipse(50, 210, 13, 13);
 		fill(RED);
 		ellipse(50, 230, 13, 13);
+		fill(255);
+		ellipse(50, 250, 13, 13);
+		EarthquakeMarker.drawX(this.g, 50, 250, 20);
 	}
 	
 	private void drawTriangle(float x, float y, float size ) {
@@ -263,6 +267,7 @@ public class EarthquakeCityMap extends PApplet {
 		contrEarthQuaks.append("+-------------------------+----------+\n");
 		contrEarthQuaks.append(String.format("|%-25s|%-10d|\n", "in the sea", quakInSea));
 		contrEarthQuaks.append("+-------------------------+----------+\n");
+		System.out.println(contrEarthQuaks);
 	}
 
 	private void printQuakesMy() {
