@@ -127,14 +127,31 @@ public class EarthquakeCityMap extends PApplet {
 		// for their geometric properties
 		map.addMarkers(quakeMarkers);
 		map.addMarkers(cityMarkers);
-
+		
+		background(0);
 	} // End setup
 
 	public void draw() {
-		background(0);
 		map.draw();
 		addKey();
+		drawButtons();
 
+	}
+	
+	@Override
+	public void mouseReleased() {
+		if (mouseX > 60 && mouseX < 85 && mouseY > 270 && mouseY < 295) {
+			background(255);
+		} else if (mouseX > 110 && mouseX < 135 && mouseY > 270 && mouseY < 295) {
+			background(100);
+		};
+	}
+	
+	@Override
+	public void keyPressed() {
+		if (key == 'w') {
+			background(255);
+		}
 	}
 
 	// helper method to draw key in GUI
@@ -168,7 +185,16 @@ public class EarthquakeCityMap extends PApplet {
 		ellipse(50, 230, 13, 13);
 		fill(255);
 		ellipse(50, 250, 13, 13);
-		EarthquakeMarker.drawX(this.g, 50, 250, 20);
+		EarthquakeMarker.drawX(this.g, 50, 250, 20);	
+		
+	}
+	
+	private void drawButtons( ) {
+		fill(255);
+		rect(60, 270, 25, 25);
+		
+		fill(100);
+		rect(110, 270, 25, 25);
 	}
 	
 	private void drawTriangle(float x, float y, float size ) {
@@ -267,57 +293,6 @@ public class EarthquakeCityMap extends PApplet {
 		contrEarthQuaks.append("+-------------------------+----------+\n");
 		contrEarthQuaks.append(String.format("|%-25s|%-10d|\n", "in the sea", quakInSea));
 		contrEarthQuaks.append("+-------------------------+----------+\n");
-		System.out.println(contrEarthQuaks);
-	}
-
-	private void printQuakesMy() {
-		// TODO: Implement this method
-		// One (inefficient but correct) approach is to:
-		// Loop over all of the countries, e.g. using
-		// for (Marker cm : countryMarkers) { ... }
-		//
-		// Inside the loop, first initialize a quake counter.
-		// Then loop through all of the earthquake
-		// markers and check to see whether (1) that marker is on land
-		// and (2) if it is on land, that its country property matches
-		// the name property of the country marker. If so, increment
-		// the country's counter.
-
-		// Here is some code you will find useful:
-		//
-		// * To get the name of a country from a country marker in variable cm, use:
-		// String name = (String)cm.getProperty("name");
-		// * If you have a reference to a Marker m, but you know the underlying object
-		// is an EarthquakeMarker, you can cast it:
-		// EarthquakeMarker em = (EarthquakeMarker)m;
-		// Then em can access the methods of the EarthquakeMarker class
-		// (e.g. isOnLand)
-		// * If you know your Marker, m, is a LandQuakeMarker, then it has a "country"
-		// property set. You can get the country with:
-		// String country = (String)m.getProperty("country");
-		List<PointFeature> quakes = ParseFeed.parseEarthquake(this, earthquakesURL);
-		StringBuilder contrEarthQuaks = new StringBuilder("+-------------------------+----------+\n");
-		contrEarthQuaks.append(String.format("|%-25s|%-10s|\n", "Country's name", "quakes"))
-				.append("+-------------------------+----------+\n");
-		int quakCount = 0;
-		int quakInSea = quakes.size();
-
-		for (Marker cm : countryMarkers) {
-			for (PointFeature eQuake : quakes) {
-				if (isInCountry(eQuake, cm)) {
-					quakCount++;
-					quakInSea--;
-				}
-			}
-
-			if (quakCount > 0) {
-				contrEarthQuaks.append(String.format("|%-25s|%-10d|\n", (String) (cm.getProperty("name")), quakCount));
-				quakCount = 0;
-			}
-		}
-
-		contrEarthQuaks.append("+-------------------------+----------+\n")
-				.append(String.format("|%-25s|%-10d|\n", "in the sea", quakInSea));
 		System.out.println(contrEarthQuaks);
 	}
 
