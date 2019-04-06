@@ -15,6 +15,7 @@ import de.fhpotsdam.unfolding.marker.Marker;
 import de.fhpotsdam.unfolding.marker.MultiMarker;
 import de.fhpotsdam.unfolding.providers.Google;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
+import de.fhpotsdam.unfolding.providers.Microsoft;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 import parsing.ParseFeed;
 import processing.core.PApplet;
@@ -79,8 +80,9 @@ public class EarthquakeCityMap extends PApplet {
 			earthquakesURL = "2.5_week.atom"; // The same feed, but saved August 7, 2015
 		} else {
 			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
+			//map = new UnfoldingMap(this, 200, 50, 650, 600, new Microsoft.AerialProvider());
 			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
-			// earthquakesURL = "2.5_week.atom";
+			 earthquakesURL = "2.5_week.atom";
 		}
 		MapUtils.createDefaultEventDispatcher(this, map);
 
@@ -145,13 +147,10 @@ public class EarthquakeCityMap extends PApplet {
 	 */
 	public void showMenu() {
 		if (lastClicked != null && lastClicked instanceof CityMarker) {
-
 			fill(255, 250, 240);
-
 			int xbase = 25;
 			int ybase = 320;
-
-			rect(xbase, ybase, 150, 120);
+			rect(xbase, ybase, 170, 120);
 			
 			int countNearbyQuakes = 0;
 			float sumMagnitude = 0;
@@ -172,8 +171,10 @@ public class EarthquakeCityMap extends PApplet {
 				}
 			}
 			
-			float averageMagn = sumMagnitude / countNearbyQuakes;
+			String mostLat = mostStrong != null ? Float.toString(mostStrong.getLocation().getLat()) : "";
+			String mostLon = mostStrong != null ? Float.toString(mostStrong.getLocation().getLon()) : "";
 			
+			float averageMagn = Math.round(sumMagnitude / countNearbyQuakes * 10f) / 10f;			
 			fill(0);
 			textAlign(LEFT, CENTER);
 			textSize(12);
@@ -181,8 +182,8 @@ public class EarthquakeCityMap extends PApplet {
 			text("nearby: " + countNearbyQuakes, xbase + 6, ybase + 40);
 			text("Average magnitude: " + averageMagn, xbase + 6, ybase + 55);
 			text("Most strong: ", xbase + 6, ybase + 70);
-			text("latitude: " + mostStrong.getLocation().getLat(), xbase + 6, ybase + 85);
-			text("longitude: " + mostStrong.getLocation().getLon(), xbase + 6, ybase + 100);
+			text("latitude: " + mostLat, xbase + 6, ybase + 85);
+			text("longitude: " + mostLon, xbase + 6, ybase + 100);
 		}
 	}
 
